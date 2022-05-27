@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Form Validation</title>
+</head>
+<body>
+    <div class="container">
+        <div class="title">Registration</div>
+
+        <form action="#" name="myForm" onsubmit="return validateForm()" method="get">
+            
+            <div class="user-details">
+                <div class="input-box" id="name">
+                    <span class="details">Full Name</span>
+                    <input type="text" name="fname" placeholder="Enter your name" onkeydown="validation()">
+                    <text class="errortxt"><span class="formerror"></span></text>
+                </div>
+                <div class="input-box" id="email">
+                    <span class="details">Email ID</span>
+                    <input type="text" name="femail" placeholder="Enter your Email" onkeydown="validation()">
+                    <text class="errortxt"><span class="formerror"></span></text>
+                </div>
+                <div class="input-box" id="pass">
+                    <span class="details">Password</span>
+                    <input type="password" name="fpass" placeholder="Password" onkeydown="validation()">
+                    <text class="errortxt"><span class="formerror"></span></text>
+                </div>
+                <div class="input-box" id="con_pass">
+                    <span class="details">Confirm Password</span>
+                    <input type="password" name="fcpass" placeholder="confirm your password" onkeydown="validation()">
+                    <text class="errortxt"><span class="formerror"></span></text>
+                </div>
+                <div class="input-box" id="phone">
+                    <span class="details">Contact Number</span>
+                    <input type="text" name="fnum" placeholder="Contact Number" onkeydown="validation()">
+                    <text class="errortxt"><span class="formerror"></span></text>
+                </div>
+            </div>
+
+            <div class="sub_button">
+                <button type="submit">Register</button>
+            </div>
+            
+        </form>
+    </div>
+
+    <div class="data">
+        <div class="title">Data Records</div>
+        <table class="table">
+            <thead class="table_head">
+                <tr>
+                    <td>Name</td><td>Email Id</td><td>Password</td>
+                    <td>Contact Number</td><td>Delete Record</td>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</body>
+<script src="./script.js"></script>
+</html>
