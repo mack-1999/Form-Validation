@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+    
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
     <title>Form Validation</title>
 </head>
+
 <body>
     <div class="container">
         <div class="title">Registration</div>
@@ -16,33 +19,33 @@
             <div class="user-details">
                 <div class="input-box" id="name">
                     <span class="details">Full Name</span>
-                    <input type="text" name="fname" placeholder="Enter your name" onkeydown="validation()">
+                    <input type="text" name="fname" placeholder="Enter your name">
                     <text class="errortxt"><span class="formerror"></span></text>
                 </div>
                 <div class="input-box" id="email">
                     <span class="details">Email ID</span>
-                    <input type="text" name="femail" placeholder="Enter your Email" onkeydown="validation()">
+                    <input type="text" name="femail" placeholder="Enter your Email">
                     <text class="errortxt"><span class="formerror"></span></text>
                 </div>
                 <div class="input-box" id="pass">
                     <span class="details">Password</span>
-                    <input type="password" name="fpass" placeholder="Password" onkeydown="validation()">
+                    <input type="password" name="fpass" placeholder="Password">
                     <text class="errortxt"><span class="formerror"></span></text>
                 </div>
                 <div class="input-box" id="con_pass">
                     <span class="details">Confirm Password</span>
-                    <input type="password" name="fcpass" placeholder="confirm your password" onkeydown="validation()">
+                    <input type="password" name="fcpass" placeholder="confirm your password">
                     <text class="errortxt"><span class="formerror"></span></text>
                 </div>
                 <div class="input-box" id="phone">
                     <span class="details">Contact Number</span>
-                    <input type="text" name="fnum" placeholder="Contact Number" onkeydown="validation()">
+                    <input type="text" name="fnum" placeholder="(999) 999-9999"">
                     <text class="errortxt"><span class="formerror"></span></text>
                 </div>
             </div>
 
             <div class="sub_button">
-                <button type="submit">Register</button>
+                <button type="submit" id="set_Data">Register</button>
             </div>
             
         </form>
@@ -61,5 +64,6 @@
         </table>
     </div>
 </body>
+
 <script src="./script.js"></script>
 </html>
