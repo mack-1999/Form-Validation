@@ -8,16 +8,16 @@ function clearErrors(){
 }
 
 function seterror(id, error) {
-    //Set error inside tag id
+    //Sets error inside tag id
     element = document.getElementById(id);
     element.getElementsByClassName('formerror')[0].innerHTML = error;
 }
 
 function validateForm() {
 
-    var returnvalue = true;
     clearErrors(); // his funtion is use to clear error
 
+    var returnvalue = true;
     //! Name Validation Code
     var name = document.forms['myForm']["fname"].value; //Getting value
 
@@ -46,12 +46,18 @@ function validateForm() {
 
     //! Email Validation Code !//
     var email = document.forms['myForm']["femail"].value;
+    var first_char = email.charAt(0);
+
     
     //Todo: Email Regular Expression
     var pattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
 
     if(email.length>30){
         seterror("email", "*Email is to long!"); //! Length condition
+        returnvalue = false;
+    }
+    else if(first_char == "@"||first_char == "!"||first_char == "#"||first_char == "$"||first_char == "%"||first_char == "&"||first_char == "*"){
+        seterror("email", "*Special Symbol not allowed at first!");
         returnvalue = false;
     }
     else if(email == ""){
@@ -70,7 +76,8 @@ function validateForm() {
     if(password.length < 6){
         seterror("pass", "*Password must me atleast 6 digit!");
         returnvalue = false;
-    }else if(password == ""){
+    }
+    else if(password == ""){
         seterror("pass", "*Password must me atleast 6 digit!");
         returnvalue = false;
     }
@@ -84,8 +91,11 @@ function validateForm() {
     //! Contact Validation !//
     var phone = document.forms['myForm']["fnum"].value;
 
-    var phone_pattern = /^[0-9]{10}$/
-    if(phone.length != 10){
+    var phone_pattern = /^[0-9]{10}$/;
+    if(phone.match(phone_pattern)){
+        returnvalue = true;
+    }
+    else{
         seterror("phone", "*Invalid Number!");
         returnvalue = false;
     }
@@ -93,38 +103,48 @@ function validateForm() {
     return returnvalue;
 }
 
-function setlocalstorage() {
-    var name = document.getElementById("name").value;
-    var email = document.getElementById("email").value;
-    var pass = document.getElementById("pass").value;
-    var phone = document.getElementById("phone").value;
+set_Data.onclick =  function () {
 
-    localStorage.setItem("name", name);
-    localStorage.setItem("email", email);
-    localStorage.setItem("pass", pass);
-    localStorage.setItem("phone", phone);
+    let set_name = document.forms['myForm']["fname"].value;
+    let set_email = document.forms['myForm']["femail"].value;
+    let set_pass = document.forms['myForm']["fpass"].value;
+    let set_phone = document.forms['myForm']["fnum"].value;
+    let dis_email = localStorage.getItem("Email");
+
+    if (set_name && set_email && set_pass && set_phone && set_email != dis_email) {
+        localStorage.setItem("Name", set_name);
+        localStorage.setItem("Email", set_email);
+        localStorage.setItem("Pass", set_pass);
+        localStorage.setItem("Phone", set_phone);
+    }
 }
 
-const tbodyEl = document.querySelector("tbody");
 const formEl = document.querySelector("form");
 const tableEl = document.querySelector("table");
+const tbodyEl = document.querySelector("tbody");
 
 function database(e) {
-    e.preventDefault();
-    var name = document.forms['myForm']["fname"].value;
-    var phone = document.forms['myForm']["fnum"].value;
-    var password = document.forms['myForm']["fpass"].value;
-    var email = document.forms['myForm']["femail"].value;
 
-    tbodyEl.innerHTML += `
-        <tr>
-            <td>${name}</td>
-            <td>${email}</td>
-            <td>${password}</td>
-            <td>${phone}</td>
-            <td><button style="text-decoration: none; border: none;"><img src="./delbtn.png" width="30px" alt="Delete" class="deleteBtn" srcset=""></button></td>
-        </tr>
-    `;
+    e.preventDefault();
+    var name_dis = localStorage.getItem("Name");
+    var email_dis = localStorage.getItem("Email");
+    var pass_dis = localStorage.getItem("Pass");
+    var phone_dis = localStorage.getItem("Phone");
+
+    if(name_dis && email_dis && pass_dis && phone_dis){
+        tbodyEl.innerHTML += `
+            <tr>
+                <td>${name_dis}</td>
+                <td>${email_dis}</td>
+                <td>${pass_dis}</td>
+                <td>${phone_dis}</td>
+                <td><button style="text-decoration: none; border: none;">
+                <img src="./garbage.png" width="25px" class="deleteBtn" style="background-color: rgb(19 19 19);">
+                </button></td>
+            </tr>
+        `;
+    }
+
 }
 
 function onDeleteRow(e){
@@ -133,6 +153,7 @@ function onDeleteRow(e){
     }
     const btn = e.target;
     btn.closest("tr").remove();
+    localStorage.clear();
 }
 
 formEl.addEventListener("submit", database);
